@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     //cout << "Hello World!" << endl;
 
     TScaner scaner;
-    scaner.openFile("F:/Projects/qt/lang.txt");
+    scaner.openFile("D:/Projects/lang.txt");
 
 //    TLexem lex;
 //    int t = scaner.scaner(lex);

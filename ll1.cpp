@@ -150,6 +150,11 @@ int LL1::analys() {
                 case SEMICOLON:
                     //epsilon();
                     break;
+
+                case BREAK:
+                    m[z++] = SEMICOLON;
+                    m[z++] = BREAK;
+                    break;
                 }
                 break;
 
@@ -210,11 +215,8 @@ int LL1::analys() {
                 break;
 
             case N_OPERS:
-                if (t == BREAK)
-                {
-                    m[z++] = SEMICOLON;
-                    m[z++] = BREAK;
-                }
+                if (t == CASE || t == CLOSEBRACE || t == DEFAULT)
+                    ;
                 else {
                     m[z++] = N_OPERS;
                     m[z++] = N_OPER;
@@ -246,7 +248,8 @@ int LL1::analys() {
                 break;
 
             case N_PRODMN:
-                if (t == PLUS || t == MINUS || t == SEMICOLON)
+                if (t == PLUS || t == MINUS || t == SEMICOLON
+                        || t == CLOSEBRACKET)
                     //epsilon();
                     ;
                 else {
@@ -294,18 +297,35 @@ int LL1::analys() {
                 break;
 
             case N_EL:
-                if (t == ID)
-                    m[z++] = ID;
-                else if (t == CONSTINT8)
+//                if (t == ID)
+//                    m[z++] = ID;
+//                else if (t == CONSTINT8)
+//                    m[z++] = CONSTINT8;
+//                else if (t == CONSTINT10)
+//                    m[z++] = CONSTINT10;
+//                else if (t == CONSTINT16)
+//                    m[z++] = CONSTINT16;
+//                else if (t == OPENBRACKET){
+//                    m[z++] = CLOSEBRACKET;
+//                    m[z++] = N_VYR;
+//                    m[z++] = OPENBRACKET;
+                switch(t) {
+                case CONSTINT8:
                     m[z++] = CONSTINT8;
-                else if (t == CONSTINT10)
+                    break;
+                case CONSTINT10:
                     m[z++] = CONSTINT10;
-                else if (t == CONSTINT16)
+                    break;
+                case CONSTINT16:
                     m[z++] = CONSTINT16;
-                else if (t == OPENBRACKET){
+                    break;
+                case OPENBRACKET:
                     m[z++] = CLOSEBRACKET;
                     m[z++] = N_VYR;
                     m[z++] = OPENBRACKET;
+                    break;
+                default: m[z++] = ID;
+
                 }
                 break;
 
