@@ -229,7 +229,7 @@ int LL1::analys() {
                 break;
 
             case N_PRODVYR:
-                if (t == SEMICOLON)
+                if (t == SEMICOLON || t == CLOSEBRACKET || t == COMMA)
 //                    epsilon();
                     ;
                 else {
@@ -249,7 +249,7 @@ int LL1::analys() {
 
             case N_PRODMN:
                 if (t == PLUS || t == MINUS || t == SEMICOLON
-                        || t == CLOSEBRACKET)
+                        || t == CLOSEBRACKET || t == COMMA)
                     //epsilon();
                     ;
                 else {
